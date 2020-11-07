@@ -77,6 +77,7 @@ module.exports = msgHandler = async (client, message) => {
         if (isBlocked) return
         //if (!isOwner) return
         switch(command) {
+	case '#stiker':
         case '!sticker':
         case '!stiker':
             if (isMedia && type === 'image') {
@@ -136,7 +137,7 @@ module.exports = msgHandler = async (client, message) => {
             break
         case '!donasi':
         case '!donate':
-            client.sendLinkWithAutoPreview(from, 'https://saweria.co/donate/mhankbarbar', donate)
+            client.sendLinkWithAutoPreview(from, 'https://www.whatsapp.com/', donate)
             break
         case '!tts':
             if (args.length === 1) return client.reply(from, 'Kirim perintah *!tts [id, en, jp, ar] [teks]*, contoh *!tts id halo semua*')
@@ -168,7 +169,7 @@ module.exports = msgHandler = async (client, message) => {
                 client.reply(from, 'Masukkan data bahasa : [id] untuk indonesia, [en] untuk inggris, [jp] untuk jepang, dan [ar] untuk arab', id)
             }
             break
-        case '!nulis':
+        case 'nulis':
             if (args.length === 1) return client.reply(from, 'Kirim perintah *!nulis [teks]*', id)
             const nulis = encodeURIComponent(body.slice(7))
             client.reply(from, mess.wait, id)
@@ -179,7 +180,7 @@ module.exports = msgHandler = async (client, message) => {
                 await client.sendFileFromUrl(from, json.result, 'Nulis.jpg', 'Nih anjim', id)
             }).catch(e => client.reply(from, "Error: "+ e));
             break
-        case '!ytmp3':
+        case 'ytmp3':
             if (args.length === 1) return client.reply(from, 'Kirim perintah *!ytmp3 [linkYt]*, untuk contoh silahkan kirim perintah *!readme*')
             let isLinks = args[1].match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/)
             if (!isLinks) return client.reply(from, mess.error.Iv, id)
@@ -200,7 +201,7 @@ module.exports = msgHandler = async (client, message) => {
                 client.reply(from, mess.error.Yt3, id)
             }
             break
-        case '!ytmp4':
+        case 'ytmp4':
             if (args.length === 1) return client.reply(from, 'Kirim perintah *!ytmp4 [linkYt]*, untuk contoh silahkan kirim perintah *!readme*')
             let isLin = args[1].match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/)
             if (!isLin) return client.reply(from, mess.error.Iv, id)
@@ -219,7 +220,7 @@ module.exports = msgHandler = async (client, message) => {
                 client.reply(from, mess.error.Yt4, id)
             }
             break
-        case '!wiki':
+        case 'wiki':
             if (args.length === 1) return client.reply(from, 'Kirim perintah *!wiki [query]*\nContoh : *!wiki asu*', id)
             const query_ = body.slice(6)
             const wiki = await get.get(`https://mhankbarbar.herokuapp.com/api/wiki?q=${query_}&lang=id&apiKey=${apiKey}`).json()
@@ -229,7 +230,7 @@ module.exports = msgHandler = async (client, message) => {
                 client.reply(from, `➸ *Query* : ${query_}\n\n➸ *Result* : ${wiki.result}`, id)
             }
             break
-        case '!cuaca':
+        case 'cuaca':
             if (args.length === 1) return client.reply(from, 'Kirim perintah *!cuaca [tempat]*\nContoh : *!cuaca tangerang', id)
             const tempat = body.slice(7)
             const weather = await get.get(`https://mhankbarbar.herokuapp.com/api/cuaca?q=${tempat}&apiKey=${apiKey}`).json()
@@ -239,7 +240,7 @@ module.exports = msgHandler = async (client, message) => {
                 client.reply(from, `➸ Tempat : ${weather.result.tempat}\n\n➸ Angin : ${weather.result.angin}\n➸ Cuaca : ${weather.result.cuaca}\n➸ Deskripsi : ${weather.result.desk}\n➸ Kelembapan : ${weather.result.kelembapan}\n➸ Suhu : ${weather.result.suhu}\n➸ Udara : ${weather.result.udara}`, id)
             }
             break
-        case '!fb':
+        case 'fb':
             if (args.length === 1) return client.reply(from, 'Kirim perintah *!fb [linkFb]* untuk contoh silahkan kirim perintah *!readme*', id)
             if (!args[1].includes('facebook.com')) return client.reply(from, mess.error.Iv, id)
             client.reply(from, mess.wait, id)
@@ -250,7 +251,7 @@ module.exports = msgHandler = async (client, message) => {
         case '!creator':
             client.sendContact(from, '6285892766102@c.us')
             break
-        case '!ig':
+        case 'ig':
             if (args.length === 1) return client.reply(from, 'Kirim perintah *!ig [linkIg]* untuk contoh silahkan kirim perintah *!readme*')
             if (!args[1].match(isUrl) && !args[1].includes('instagram.com')) return client.reply(from, mess.error.Iv, id)
             try {
@@ -302,7 +303,7 @@ module.exports = msgHandler = async (client, message) => {
             if (!isNsfw) return
             client.reply(from, '1. !randomHentai\n2. !randomNsfwNeko', id)
             break
-        case '!igstalk':
+        case 'igstalk':
             if (args.length === 1)  return client.reply(from, 'Kirim perintah *!igStalk @username*\nConntoh *!igStalk @duar_amjay*', id)
             const stalk = await get.get(`https://mhankbarbar.herokuapp.com/api/stalk?username=${args[1]}&apiKey=${apiKey}`).json()
             if (stalk.error) return client.reply(from, stalk.error, id)
@@ -310,13 +311,13 @@ module.exports = msgHandler = async (client, message) => {
             const caps = `➸ *Nama* : ${Name}\n➸ *Username* : ${Username}\n➸ *Jumlah Followers* : ${Jumlah_Followers}\n➸ *Jumlah Following* : ${Jumlah_Following}\n➸ *Jumlah Postingan* : ${Jumlah_Post}\n➸ *Biodata* : ${Biodata}`
             await client.sendFileFromUrl(from, Profile_pic, 'Profile.jpg', caps, id)
             break
-        case '!infogempa':
+        case 'infogempa':
             const bmkg = await get.get(`https://mhankbarbar.herokuapp.com/api/infogempa?apiKey=${apiKey}`).json()
             const { potensi, koordinat, lokasi, kedalaman, magnitude, waktu, map } = bmkg
             const hasil = `*${waktu}*\n📍 *Lokasi* : *${lokasi}*\n〽️ *Kedalaman* : *${kedalaman}*\n💢 *Magnitude* : *${magnitude}*\n🔘 *Potensi* : *${potensi}*\n📍 *Koordinat* : *${koordinat}*`
             client.sendFileFromUrl(from, map, 'shakemap.jpg', hasil, id)
             break
-        case '!anime':
+        case 'anime':
             if (args.length === 1) return client.reply(from, 'Kirim perintah *!anime [query]*\nContoh : *!anime darling in the franxx*', id)
             const animek = await get.get(`https://mhankbarbar.herokuapp.com/api/kuso?q=${body.slice(7)}&apiKey=${apiKey}`).json()
             if (animek.error) return client.reply(from, animek.error, id)
@@ -594,7 +595,7 @@ module.exports = msgHandler = async (client, message) => {
             if (!quotedMsgObj.fromMe) return client.reply(from, 'Salah!!, Bot tidak bisa mengahpus chat user lain!', id)
             client.deleteMessage(quotedMsgObj.chatId, quotedMsgObj.id, false)
             break
-        case '!getses':
+        case 'getses':
             const sesPic = await client.getSnapshot()
             client.sendFile(from, sesPic, 'session.png', 'Neh...', id)
             break
@@ -604,7 +605,7 @@ module.exports = msgHandler = async (client, message) => {
             const lirik = await liriklagu(lagu)
             client.reply(from, lirik, id)
             break
-        case '!chord':
+        case 'chord':
             if (args.length === 1) return client.reply(from, 'Kirim perintah *!chord [query]*, contoh *!chord aku bukan boneka*', id)
             const query__ = body.slice(7)
             const chord = await get.get(`https://mhankbarbar.herokuapp.com/api/chord?q=${query__}&apiKey=${apiKey}`).json()
@@ -652,7 +653,7 @@ module.exports = msgHandler = async (client, message) => {
             const loli = await get.get('https://mhankbarbar.herokuapp.com/api/randomloli').json()
             client.sendFileFromUrl(from, loli.result, 'loli.jpeg', 'Lolinya om', id)
             break
-        case '!waifu':
+        case 'waifu':
             const waifu = await get.get(`https://mhankbarbar.herokuapp.com/api/waifu?apiKey=${apiKey}`).json()
             client.sendFileFromUrl(from, waifu.image, 'Waifu.jpg', `➸ Name : ${waifu.name}\n➸ Description : ${waifu.desc}\n\n➸ Source : ${waifu.source}`, id)
             break
@@ -766,6 +767,8 @@ module.exports = msgHandler = async (client, message) => {
             const { postlink, title, subreddit, url, nsfw, spoiler } = response.data
             client.sendFileFromUrl(from, `${url}`, 'meme.jpg', `${title}`)
             break
+	case '#menu':
+	case 'menu':
         case '!help':
             client.sendText(from, help)
             break
