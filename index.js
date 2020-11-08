@@ -1,7 +1,7 @@
 const { create, Client } = require('@open-wa/wa-automate')
 const welcome = require('./lib/welcome')
 const msgHandler = require('./msgHndlr')
-const options = require('./options')
+//const options = require('./options')
 
 const start = async (client = new Client()) => {
         console.log('[SERVER] Server Started!')
@@ -48,6 +48,27 @@ const start = async (client = new Client()) => {
     }
 
 
+
+const options = {
+    sessionId: 'Imperial',
+    headless: true,
+    qrTimeout: 0,
+    authTimeout: 0,
+    restartOnCrash: start,
+    cacheEnabled: false,
+    useChrome: true,
+    killProcessOnBrowserClose: true,
+    throwErrorOnTosBlock: false,
+    chromiumArgs: [
+        '--no-sandbox',
+        '--disable-setuid-sandbox',
+        '--aggressive-cache-discard',
+        '--disable-cache',
+        '--disable-application-cache',
+        '--disable-offline-load-stale-cache',
+        '--disk-cache-size=0'
+    ]
+}
 
 create(options)
     .then((client) => start(client))
