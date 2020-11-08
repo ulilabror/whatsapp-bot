@@ -1,3 +1,10 @@
+const fs = require('fs')
+/**
+ * Get Client Options
+ * @param  {Function} start function
+ * @param  {Boolean} headless
+ */
+
 module.exports = options = (headless, start) => {
     // const chromePath = {
     //     win32: 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe', // Windows 32 bit
@@ -24,6 +31,9 @@ module.exports = options = (headless, start) => {
 
     const options = {
         headless: headless,
+        qrRefreshS: 20,
+        qrTimeout: 0,
+        authTimeout: 0,
         autoRefresh: true,
         restartOnCrash: start,
         cacheEnabled: false,
