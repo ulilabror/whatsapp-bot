@@ -46,10 +46,17 @@ const start = async (client = new Client()) => {
             .then(() => client.contactBlock(call.peerJid))
         }))
     }
+
+
+
+create(options)
+    .then((client) => start(client))
+    .catch((err) => new Error(err))
+
+/*
 create('Imperial', options(true, start))
     .then((client) => start(client))
     .catch((err) => new Error(err))
-/*
 create('BarBar', options(true, start))
     .then(client => start(client))
     .catch((error) => console.log(error))
