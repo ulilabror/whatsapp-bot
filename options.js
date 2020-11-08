@@ -29,28 +29,27 @@ module.exports = options = (headless, start) => {
     //     process.exit(1)
     // }
 
-    const options = {
-        headless: headless,
-        qrRefreshS: 20,
-        qrTimeout: 0,
-        authTimeout: 0,
-        autoRefresh: true,
-        restartOnCrash: start,
-        cacheEnabled: false,
-        // executablePath: execPath,
-        useChrome: true,
-        killProcessOnBrowserClose: true,
-        throwErrorOnTosBlock: false,
-        chromiumArgs: [
-            '--no-sandbox',
-            '--disable-setuid-sandbox',
-            '--aggressive-cache-discard',
-            '--disable-cache',
-            '--disable-application-cache',
-            '--disable-offline-load-stale-cache',
-            '--disk-cache-size=0'
-        ]
-    }
+  const options = {
+    sessionId: 'Imperial',
+    headless: true,
+    qrTimeout: 0,
+    authTimeout: 0,
+    restartOnCrash: start,
+    cacheEnabled: false,
+    useChrome: true,
+    killProcessOnBrowserClose: true,
+    throwErrorOnTosBlock: false,
+    chromiumArgs: [
+        '--no-sandbox',
+        '--disable-setuid-sandbox',
+        '--aggressive-cache-discard',
+        '--disable-cache',
+        '--disable-application-cache',
+        '--disable-offline-load-stale-cache',
+        '--disk-cache-size=0'
+    ]
+}
+
 
     return options
 }
