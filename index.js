@@ -29,7 +29,7 @@ const start = async (client = new Client()) => {
         client.onAddedToGroup(((chat) => {
             let totalMem = chat.groupMetadata.participants.length
             if (totalMem < 2) { 
-            	client.sendText(chat.id, `Cih member nya cuma ${totalMem}, Kalo mau invite bot, minimal jumlah mem ada 30`).then(() => client.leaveGroup(chat.id)).then(() => client.deleteChat(chat.id))
+            	client.sendText(chat.id, `Cih member nya cuma ${totalMem}, Kalo mau invite bot, minimal jumlah mem ada 3`).then(() => client.leaveGroup(chat.id)).then(() => client.deleteChat(chat.id))
             } else {
                 client.sendText(chat.groupMetadata.id, `Halo warga grup *${chat.contact.name}* terimakasih sudah menginvite bot ini, untuk melihat menu silahkan kirim *!help*`)
             }
@@ -46,7 +46,11 @@ const start = async (client = new Client()) => {
             .then(() => client.contactBlock(call.peerJid))
         }))
     }
-
+create('Imperial', options(true, start))
+    .then((client) => start(client))
+    .catch((err) => new Error(err))
+/*
 create('BarBar', options(true, start))
     .then(client => start(client))
     .catch((error) => console.log(error))
+*/
