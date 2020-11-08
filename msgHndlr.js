@@ -80,6 +80,7 @@ module.exports = msgHandler = async (client, message) => {
 	case '#stiker':
         case '!sticker':
         case '!stiker':
+			console.log('stiker')
             if (isMedia && type === 'image') {
                 const mediaData = await decryptMedia(message, uaOverride)
                 const imageBase64 = `data:${mimetype};base64,${mediaData.toString('base64')}`
@@ -770,6 +771,7 @@ module.exports = msgHandler = async (client, message) => {
 	case '#menu':
 	case 'menu':
         case '!help':
+	    console.log('menu')
             client.sendText(from, help)
             break
         case '!readme':
