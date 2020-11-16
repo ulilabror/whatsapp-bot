@@ -241,13 +241,14 @@ module.exports = msgHandler = async (client, message) => {
                 client.reply(from, `➸ Tempat : ${weather.result.tempat}\n\n➸ Angin : ${weather.result.angin}\n➸ Cuaca : ${weather.result.cuaca}\n➸ Deskripsi : ${weather.result.desk}\n➸ Kelembapan : ${weather.result.kelembapan}\n➸ Suhu : ${weather.result.suhu}\n➸ Udara : ${weather.result.udara}`, id)
             }
             break
-        case 'fb':
+        case '!fb':
             if (args.length === 1) return client.reply(from, 'Kirim perintah *!fb [linkFb]* untuk contoh silahkan kirim perintah *!readme*', id)
             if (!args[1].includes('facebook.com')) return client.reply(from, mess.error.Iv, id)
             client.reply(from, mess.wait, id)
-            const epbe = await get.get(`https://mhankbarbar.herokuapp.com/api/epbe?url=${args[1]}&apiKey=${apiKey}`).json()
-            if (epbe.error) return client.reply(from, epbe.error, id)
-            client.sendFileFromUrl(from, epbe.result, 'epbe.mp4', epbe.title, id)
+	    const efbe = await fb(args[1])
+           // const epbe = await get.get(`https://mhankbarbar.herokuapp.com/api/epbe?url=${args[1]}&apiKey=${apiKey}`).json()
+            if (epbe.status==false) return client.reply(from, epbe.error, id)
+            client.sendFileFromUrl(from, epbe.url, 'epbe.mp4', epbe.title, id)
             break
         case '!creator':
             client.sendContact(from, '6285892766102@c.us')
